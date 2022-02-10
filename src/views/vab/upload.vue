@@ -15,17 +15,15 @@
 
 		<el-card shadow="never" header="在验证表单中使用">
 			<el-form ref="ruleForm" :model="form" :rules="rules" label-width="100px">
-				<el-form-item label="身份证" class="imglist" required>
-					<el-col>
+				<el-form-item label="身份证" required>
+					<el-space wrap :size="10">
 						<el-form-item prop="img1">
 							<sc-upload v-model="form.img1" title="人像面"></sc-upload>
 						</el-form-item>
-					</el-col>
-					<el-col>
 						<el-form-item prop="img2">
 							<sc-upload v-model="form.img2" title="国徽面"></sc-upload>
 						</el-form-item>
-					</el-col>
+					</el-space>
 				</el-form-item>
 				<el-form-item label="其他凭证" prop="img3">
 					<sc-upload-multiple v-model="form.img3"></sc-upload-multiple>
@@ -104,7 +102,6 @@
 <style scoped>
 	.el-card+.el-card {margin-top: 15px;}
 
-	.imglist {margin-bottom:0;}
 	.imglist .el-col+.el-col {margin-left: 10px;}
 	.custom-empty {width: 100%;height: 100%;line-height: 1;display: flex;flex-direction: column;align-items: center;justify-content: center;}
 	.custom-empty i {font-size: 30px;color: #8c939d;}

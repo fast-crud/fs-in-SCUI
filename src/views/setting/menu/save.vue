@@ -170,6 +170,7 @@
 			//表单注入数据
 			setData(data, pid){
 				this.form = data
+				this.form.apiList = data.apiList || []
 				this.form.parentId = pid
 			}
 		}
