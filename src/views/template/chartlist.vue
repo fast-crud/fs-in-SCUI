@@ -2,13 +2,13 @@
 	<el-container>
 		<el-header>
 			<div class="left-panel">
-				<el-radio-group v-model="dateType" size="mini" style="margin-right: 15px;">
+				<el-radio-group v-model="dateType" style="margin-right: 15px;">
 					<el-radio-button label="今天"></el-radio-button>
 					<el-radio-button label="昨天"></el-radio-button>
 					<el-radio-button label="最近7天"></el-radio-button>
 					<el-radio-button label="最近30天"></el-radio-button>
 				</el-radio-group>
-				<el-date-picker v-model="date" type="datetimerange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" size="mini"></el-date-picker>
+				<el-date-picker v-model="date" type="datetimerange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
 			</div>
 		</el-header>
 		<el-main>

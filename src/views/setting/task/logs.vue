@@ -20,7 +20,7 @@
 				</el-table-column>
 				<el-table-column label="执行日志" prop="logs" width="100" fixed="right">
 					<template #default="scope">
-						<el-button size="mini" @click="show(scope.row)" type="text">日志</el-button>
+						<el-button size="small" @click="show(scope.row)" type="text">日志</el-button>
 					</template>
 				</el-table-column>
 			</scTable>

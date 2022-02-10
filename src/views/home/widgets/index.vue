@@ -82,7 +82,7 @@
 					</div>
 				</el-main>
 				<el-footer style="height:51px;">
-					<el-button size="mini" @click="backDefaul()">恢复默认</el-button>
+					<el-button size="small" @click="backDefaul()">恢复默认</el-button>
 				</el-footer>
 			</el-container>
 		</div>

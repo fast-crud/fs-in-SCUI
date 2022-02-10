@@ -146,7 +146,7 @@
 								<el-table-column label="事件" prop="title" width="150"></el-table-column>
 								<el-table-column label="等级" prop="type" width="150"></el-table-column>
 								<el-table-column label="通知" prop="push" ></el-table-column>
-								<el-table-column label="触发时间" prop="time" width="150"></el-table-column>
+								<el-table-column label="触发时间" prop="time" width="180"></el-table-column>
 							</scTable>
 						</el-card>
 						<el-card shadow="never" header="Rule" style="margin-top: 15px;">
@@ -158,7 +158,7 @@
 								<el-table-column></el-table-column>
 								<el-table-column label="操作" width="150" align="right">
 									<el-dropdown>
-										<el-button type="text" size="mini" icon="el-icon-more"></el-button>
+										<el-button type="text" size="small" icon="el-icon-more"></el-button>
 										<template #dropdown>
 											<el-dropdown-menu>
 												<el-dropdown-item>编辑</el-dropdown-item>

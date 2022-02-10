@@ -35,7 +35,7 @@
 					<el-input v-model="form.name" placeholder="请输入名称" clearable></el-input>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" size="medium" @click="save">保 存</el-button>
+					<el-button type="primary" @click="save">保 存</el-button>
 				</el-form-item>
 			</el-form>
 		</el-card>

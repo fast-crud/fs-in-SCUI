@@ -20,7 +20,7 @@
 					</el-tree>
 				</el-main>
 				<el-footer style="height:51px;">
-					<el-button type="primary" size="mini" icon="el-icon-plus" style="width: 100%;" @click="addDic">字典分类</el-button>
+					<el-button type="primary" size="small" icon="el-icon-plus" style="width: 100%;" @click="addDic">字典分类</el-button>
 				</el-footer>
 			</el-container>
 		</el-aside>
@@ -34,7 +34,7 @@
 			<el-main class="nopadding">
 				<scTable ref="table" :apiObj="listApi" row-key="id" :params="listApiParams" @selection-change="selectionChange" stripe :paginationLayout="'prev, pager, next'">
 					<el-table-column type="selection" width="50"></el-table-column>
-					<el-table-column label="" width="50">
+					<el-table-column label="" width="60">
 						<template #default>
 							<el-tag class="move" style="cursor: move;"><el-icon-d-caret style="width: 1em; height: 1em;"/></el-tag>
 						</template>

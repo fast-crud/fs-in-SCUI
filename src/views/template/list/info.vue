@@ -11,11 +11,11 @@
 
 		<div class="make">
 			<div class="make-left">
-				<el-button type="primary" size="small">主要操作</el-button>
-				<el-button size="small">次要操作</el-button>
-				<el-button size="small">次要操作</el-button>
+				<el-button type="primary">主要操作</el-button>
+				<el-button>次要操作</el-button>
+				<el-button>次要操作</el-button>
 				<el-dropdown>
-					<el-button size="small" icon="el-icon-arrow-down"></el-button>
+					<el-button icon="el-icon-arrow-down"></el-button>
 					<template #dropdown>
 						<el-dropdown-menu>
 							<el-dropdown-item>更改状态</el-dropdown-item>
@@ -40,8 +40,8 @@
 					    <el-descriptions-item label="ID">5001</el-descriptions-item>
 					    <el-descriptions-item label="名称">scEcharts</el-descriptions-item>
 						<el-descriptions-item label="参与者">
-							<el-tag size="mini">Sakuya</el-tag>
-							<el-tag size="mini">Lolowan</el-tag>
+							<el-tag size="small">Sakuya</el-tag>
+							<el-tag size="small">Lolowan</el-tag>
 						</el-descriptions-item>
 					    <el-descriptions-item label="类型">数据</el-descriptions-item>
 					    <el-descriptions-item label="创建时间">2010-10-10</el-descriptions-item>

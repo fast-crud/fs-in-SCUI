@@ -8,7 +8,7 @@
 							<el-avatar :size="80" src="img/avatar.jpg"></el-avatar>
 							<h2>{{ form.name||'-' }}</h2>
 							<p>{{ form.about||'无签名' }}</p>
-							<el-button type="primary" round icon="el-icon-collection-tag" size="medium">Administrator</el-button>
+							<el-button type="primary" round icon="el-icon-collection-tag" size="large">Administrator</el-button>
 						</div>
 						<div class="user-info-main">
 							<ul>
@@ -42,7 +42,7 @@
 								<el-timeline-item v-for="(activity, index) in activities" :key="index" :timestamp="activity.timestamp" placement="top">
 									<div class="activity-item">
 										<el-avatar class="avatar" :size="24" src="img/avatar.jpg"></el-avatar>
-										<label>{{activity.operate}}</label><el-tag v-if="activity.mod" size="mini">{{activity.mod}}</el-tag>{{activity.describe}}
+										<label>{{activity.operate}}</label><el-tag v-if="activity.mod">{{activity.mod}}</el-tag>{{activity.describe}}
 									</div>
 								</el-timeline-item>
 							</el-timeline>

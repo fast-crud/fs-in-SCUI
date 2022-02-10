@@ -26,7 +26,7 @@
 								<el-input v-model="scope.row.val" placeholder="请输入内容"></el-input>
 							</template>
 						</el-table-column>
-						<el-table-column prop="open" label="checked" width="80" align="center">
+						<el-table-column prop="open" label="checked" width="85" align="center">
 							<template #default="scope">
 								<el-checkbox v-model="scope.row.checked"></el-checkbox>
 							</template>

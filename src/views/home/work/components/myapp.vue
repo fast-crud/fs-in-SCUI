@@ -19,37 +19,32 @@
 		</ul>
 
 		<el-drawer title="添加应用" v-model="modsDrawer" :size="570" destroy-on-close>
-			<el-container>
-				<el-main class="nopadding">
-					<el-scrollbar>
-						<div class="setMods">
-							<h4>我的常用 ( {{myMods.length}} )</h4>
-							<draggable tag="ul" v-model="myMods" animation="200" item-key="path" group="people">
-								<template #item="{ element }">
-									<li :style="{background:element.meta.color||'#909399'}">
-										<el-icon><component :is="element.meta.icon||el-icon-menu" /></el-icon>
-										<p>{{element.meta.title}}</p>
-									</li>
-								</template>
-							</draggable>
-						</div>
-						<div class="setMods">
-							<h4>全部应用 ( {{filterMods.length}} )</h4>
-							<draggable tag="ul" v-model="filterMods" animation="200" item-key="path" :sort="false" group="people">
-								<template #item="{ element }">
-									<li :style="{background:element.meta.color||'#909399'}">
-										<el-icon><component :is="element.meta.icon||el-icon-menu" /></el-icon>
-										<p>{{element.meta.title}}</p>
-									</li>
-								</template>
-							</draggable>
-						</div>
-					</el-scrollbar>
-				</el-main>
-				<el-footer>
-					<el-button type="primary" size="small" @click="saveMods">保存</el-button>
-				</el-footer>
-			</el-container>
+			<div class="setMods">
+				<h4>我的常用 ( {{myMods.length}} )</h4>
+				<draggable tag="ul" v-model="myMods" animation="200" item-key="path" group="people">
+					<template #item="{ element }">
+						<li :style="{background:element.meta.color||'#909399'}">
+							<el-icon><component :is="element.meta.icon||el-icon-menu" /></el-icon>
+							<p>{{element.meta.title}}</p>
+						</li>
+					</template>
+				</draggable>
+			</div>
+			<div class="setMods">
+				<h4>全部应用 ( {{filterMods.length}} )</h4>
+				<draggable tag="ul" v-model="filterMods" animation="200" item-key="path" :sort="false" group="people">
+					<template #item="{ element }">
+						<li :style="{background:element.meta.color||'#909399'}">
+							<el-icon><component :is="element.meta.icon||el-icon-menu" /></el-icon>
+							<p>{{element.meta.title}}</p>
+						</li>
+					</template>
+				</draggable>
+			</div>
+			<template #footer>
+				<el-button @click="modsDrawer=false">取消</el-button>
+				<el-button type="primary" @click="saveMods">保存</el-button>
+			</template>
 		</el-drawer>
 	</div>
 </template>

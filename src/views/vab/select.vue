@@ -14,22 +14,22 @@
 		<el-row :gutter="15">
 			<el-col :lg="12">
 				<el-card shadow="never" header="异步单选">
-					<sc-select v-model="value" :apiObj="$API.system.dic.get" clearable filterable></sc-select>
+					<sc-select v-model="value" :apiObj="$API.system.dic.get" clearable filterable style="width: 100%;"></sc-select>
 				</el-card>
 			</el-col>
 			<el-col :lg="12">
 				<el-card shadow="never" header="异步多选">
-					<sc-select v-model="value2" :apiObj="$API.system.dic.get" clearable filterable multiple></sc-select>
+					<sc-select v-model="value2" :apiObj="$API.system.dic.get" clearable filterable multiple style="width: 100%;"></sc-select>
 				</el-card>
 			</el-col>
 			<el-col :lg="12">
 				<el-card shadow="never" header="字典选择器">
-					<sc-select v-model="value3" dic="notice" clearable filterable></sc-select>
+					<sc-select v-model="value3" dic="notice" clearable filterable style="width: 100%;"></sc-select>
 				</el-card>
 			</el-col>
 			<el-col :lg="12">
 				<el-card shadow="never" header="自定义模板">
-					<sc-select v-model="value4" dic="notice" clearable filterable placeholder="自定义placeholder">
+					<sc-select v-model="value4" dic="notice" clearable filterable placeholder="自定义placeholder" style="width: 100%;">
 						<template #option="{data}">
 							<span style="float: left">{{ data.label }}</span>
 							<span style="float: right; color: #999; font-size: 13px">{{ data.value }}</span>

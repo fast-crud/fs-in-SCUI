@@ -25,10 +25,10 @@
 								<h2>{{task.title}}</h2>
 								<div class="task-bottom">
 									<div class="tags">
-										<el-tag type="info" size="mini">#{{task.id}}</el-tag>
-										<el-tag v-if="task.state=='open'" type="info" size="mini">{{task.state}}</el-tag>
-										<el-tag v-if="task.state=='complete'" type="success" size="mini">{{task.state}}</el-tag>
-										<el-tag v-if="task.state=='timeout'" type="danger" size="mini">{{task.state}}</el-tag>
+										<el-tag type="info" size="small">#{{task.id}}</el-tag>
+										<el-tag v-if="task.state=='open'" type="info" size="small">{{task.state}}</el-tag>
+										<el-tag v-if="task.state=='complete'" type="success" size="small">{{task.state}}</el-tag>
+										<el-tag v-if="task.state=='timeout'" type="danger" size="small">{{task.state}}</el-tag>
 									</div>
 									<el-avatar :size="20" :src="task.avatar"></el-avatar>
 								</div>
