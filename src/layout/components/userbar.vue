@@ -1,5 +1,8 @@
 <template>
 	<div class="user-bar">
+		<div class="panel-item hidden-sm-and-down" @click="search">
+			<el-icon><el-icon-search /></el-icon>
+		</div>
 		<div class="screen panel-item hidden-sm-and-down" @click="screen">
 			<el-icon><el-icon-full-screen /></el-icon>
 		</div>
@@ -54,14 +57,25 @@
 			</template>
 		</el-dropdown>
 	</div>
+
+	<el-dialog v-model="searchVisible" :width="700"  title="搜索" custom-class="drawerBG" center destroy-on-close>
+		<search @success="searchVisible=false"></search>
+	</el-dialog>
+
 </template>
 
 <script>
+	import search from './search.vue';
+
 	export default {
+		components: {
+			search
+		},
 		data(){
 			return {
 				userName: "",
 				userNameF: "",
+				searchVisible: false,
 				msg: false,
 				msgList: [
 					{
@@ -147,6 +161,10 @@
 			//标记已读
 			markRead(){
 				this.msgList = []
+			},
+			//搜索
+			search(){
+				this.searchVisible = true
 			}
 		}
 	}
