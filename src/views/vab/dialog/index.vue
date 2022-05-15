@@ -9,7 +9,7 @@
 
 <template>
 	<el-main>
-		<el-alert title="二次封装el-dialog,加入拖拽/加载中/最大化." type="success" style="margin:0 0 20px 0;"></el-alert>
+		<el-alert title="二次封装el-dialog,加入加载中/最大化." type="success" style="margin:0 0 20px 0;"></el-alert>
 		<el-card shadow="never" header="内置">
 			<el-button type="primary" @click="open1">默认</el-button>
 			<el-button type="primary" @click="open2">加载</el-button>
@@ -22,7 +22,7 @@
 		</el-card>
 	</el-main>
 
-	<sc-dialog v-model="dialog1" title="提示">
+	<sc-dialog v-model="dialog1" draggable title="提示">
 		内容
 		<template #footer>
 			<el-button @click="dialog1 = false">取 消</el-button>
@@ -30,7 +30,7 @@
 		</template>
 	</sc-dialog>
 
-	<sc-dialog v-model="dialog2" title="模拟加载" :width="400" :loading="dialog2Loading">
+	<sc-dialog v-model="dialog2" draggable title="模拟加载" :width="400" :loading="dialog2Loading">
 		<el-empty description="NO Data" :image-size="80"></el-empty>
 		<template #footer>
 			<el-button @click="dialog2 = false">取 消</el-button>
@@ -46,8 +46,8 @@
 		</template>
 	</sc-dialog>
 
-	<dialog1 v-if="asynDialog1" @closed="asynDialog1 = false"></dialog1>
-	<dialog2 v-if="asynDialog2" @closed="asynDialog2 = false"></dialog2>
+	<dialog1 v-if="asynDialog1" draggable @closed="asynDialog1 = false"></dialog1>
+	<dialog2 v-if="asynDialog2" draggable @closed="asynDialog2 = false"></dialog2>
 
 </template>
 

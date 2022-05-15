@@ -20,12 +20,14 @@
 				<el-table-column label="授权到期" prop="exp" width="150"></el-table-column>
 				<el-table-column label="操作" fixed="right" align="right" width="120">
 					<template #default="scope">
-						<el-button type="text" size="small" @click="table_edit(scope.row, scope.$index)">编辑</el-button>
-						<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
-							<template #reference>
-								<el-button type="text" size="small">删除</el-button>
-							</template>
-						</el-popconfirm>
+						<el-button-group>
+							<el-button text type="primary" size="small" @click="table_edit(scope.row, scope.$index)">编辑</el-button>
+							<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
+								<template #reference>
+									<el-button text type="primary" size="small">删除</el-button>
+								</template>
+							</el-popconfirm>
+						</el-button-group>
 					</template>
 				</el-table-column>
 			</scTable>

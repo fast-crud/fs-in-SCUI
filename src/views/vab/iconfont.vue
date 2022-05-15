@@ -36,4 +36,7 @@
 	.icon-box i {font-size: 26px;transition: color .15s linear;}
 	.icon-box p {color: #999;margin-top: 15px;transition: color .15s linear;}
 	.icon-box:hover i, .icon-box:hover p {color: #5cb6ff;}
+
+	.dark .box {border-color: var(--el-border-color-light);}
+	.dark .icon-box {background: var(--el-bg-color-overlay);border-color: var(--el-border-color-light);}
 </style>

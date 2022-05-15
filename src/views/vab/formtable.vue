@@ -21,7 +21,7 @@
 								</el-select>
 							</template>
 						</el-table-column>
-						<el-table-column prop="val" label="数量" width="180">
+						<el-table-column prop="val" label="数量" min-width="180">
 							<template #default="scope">
 								<el-input v-model="scope.row.val" placeholder="请输入内容"></el-input>
 							</template>

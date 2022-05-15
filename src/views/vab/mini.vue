@@ -30,7 +30,7 @@
 						<h2>持续更新中...</h2>
 						<p>非常欢迎提交Issue/PR完善和补充更多好玩的原子组件</p>
 						<p>原子组件库位置：@/components/scMini/*</p>
-						<el-button type="text" @click="goIssue">提交想法</el-button>
+						<el-button type="primary" text @click="goIssue">提交想法</el-button>
 					</div>
 				</el-card>
 			</el-col>

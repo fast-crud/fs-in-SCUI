@@ -85,7 +85,7 @@
 								</el-table-column>
 								<el-table-column prop="value" label="移除" width="55">
 									<template #default="scope">
-										<el-button size="small" type="text" @click="deleteConditionList(scope.$index)">移除</el-button>
+										<el-link type="danger" :underline="false" @click="deleteConditionList(scope.$index)">移除</el-link>
 									</template>
 								</el-table-column>
 							</el-table>

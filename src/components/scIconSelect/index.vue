@@ -1,10 +1,10 @@
 <!--
  * @Descripttion: 图标选择器组件
- * @version: 1.3
+ * @version: 1.4
  * @Author: sakuya
  * @Date: 2021年7月27日10:02:46
  * @LastEditors: sakuya
- * @LastEditTime: 2022年2月8日15:47:13
+ * @LastEditTime: 2022年5月14日19:49:42
 -->
 
 <template>
@@ -91,4 +91,8 @@
 	.sc-icon-select__list li i {display: inline-block;width: 100%;height:100%;font-size: 26px;color: #6d7882;background: #fff;display: flex;justify-content: center;align-items: center;border-radius: 4px;}
 	.sc-icon-select__list li:hover {box-shadow: 0 0 1px 4px rgba(64,158,255,1);}
 	.sc-icon-select__list li:hover i {color: #409EFF;}
+
+	.dark .sc-icon-select__list li {box-shadow: 0 0 0 1px #333;;}
+	.dark .sc-icon-select__list li:hover {box-shadow: 0 0 1px 4px rgba(64,158,255,1);}
+	.dark .sc-icon-select__list li i {background: var(--el-bg-color);}
 </style>

@@ -49,9 +49,9 @@
 									<el-checkbox v-model="scope.row.sortable"></el-checkbox>
 								</template>
 							</el-table-column>
-							<el-table-column prop="filters" label="过滤项" width="80" align="center">
+							<el-table-column prop="filters" label="过滤项" width="90" align="center">
 								<template #default="scope">
-									<el-button type="text" :style="{'color':scope.row.filters.length==0?'#bbb':null}" @click="setFilters(scope.row.filters)">过滤项</el-button>
+									<el-button text size="small" :type="scope.row.filters.length==0?'':'primary'" @click="setFilters(scope.row.filters)">过滤项</el-button>
 								</template>
 							</el-table-column>
 							<el-table-column prop="fixed" label="固定" width="80" align="center">

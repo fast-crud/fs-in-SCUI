@@ -12,8 +12,10 @@
 								<span class="label">{{ node.label }}</span>
 								<span class="code">{{ data.code }}</span>
 								<span class="do">
-									<el-icon @click.stop="dicEdit(data)"><el-icon-edit /></el-icon>
-									<el-icon @click.stop="dicDel(node, data)"><el-icon-delete /></el-icon>
+									<el-button-group>
+										<el-button icon="el-icon-edit" size="small" @click.stop="dicEdit(data)"></el-button>
+										<el-button icon="el-icon-delete" size="small" @click.stop="dicDel(node, data)"></el-button>
+									</el-button-group>
 								</span>
 							</span>
 						</template>
@@ -46,14 +48,16 @@
 							<el-switch v-model="scope.row.yx" @change="changeSwitch($event, scope.row)" :loading="scope.row.$switch_yx" active-value="1" inactive-value="0"></el-switch>
 						</template>
 					</el-table-column>
-					<el-table-column label="操作" fixed="right" align="right" width="140">
+					<el-table-column label="操作" fixed="right" align="right" width="120">
 						<template #default="scope">
-							<el-button type="text" size="small" @click="table_edit(scope.row, scope.$index)">编辑</el-button>
-							<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
-								<template #reference>
-									<el-button type="text" size="small">删除</el-button>
-								</template>
-							</el-popconfirm>
+							<el-button-group>
+								<el-button text type="primary" size="small" @click="table_edit(scope.row, scope.$index)">编辑</el-button>
+								<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
+									<template #reference>
+										<el-button text type="primary" size="small">删除</el-button>
+									</template>
+								</el-popconfirm>
+							</el-button-group>
 						</template>
 					</el-table-column>
 				</scTable>
@@ -323,8 +327,6 @@
 	.custom-tree-node {display: flex;flex: 1;align-items: center;justify-content: space-between;font-size: 14px;padding-right: 24px;height:100%;}
 	.custom-tree-node .code {font-size: 12px;color: #999;}
 	.custom-tree-node .do {display: none;}
-	.custom-tree-node .do i {margin-left:5px;color: #999;padding:5px;}
-	.custom-tree-node .do i:hover {color: #333;}
 	.custom-tree-node:hover .code {display: none;}
 	.custom-tree-node:hover .do {display: inline-block;}
 </style>

@@ -1,10 +1,10 @@
 <!--
  * @Descripttion: 仿钉钉流程设计器
- * @version: 1.2
+ * @version: 1.3
  * @Author: sakuya
  * @Date: 2021年9月14日08:38:35
  * @LastEditors: sakuya
- * @LastEditTime: 2022年2月9日16:48:49
+ * @LastEditTime: 2022年5月14日19:43:46
 -->
 
 <template>
@@ -138,17 +138,17 @@
 	.node-wrap-drawer__title label:hover {border-bottom: 1px dashed #409eff;}
 	.node-wrap-drawer__title .node-wrap-drawer__title-edit {color: #409eff;margin-left: 10px;vertical-align: middle;}
 
-	[data-theme='dark'] .sc-workflow-design {
+	.dark .sc-workflow-design {
 		.node-wrap-box,.auto-judge {background: #2b2b2b;}
-		.col-box {background: #222225;}
+		.col-box {background: var(--el-bg-color);}
 		.top-left-cover-line,
 		.top-right-cover-line,
 		.bottom-left-cover-line,
-		.bottom-right-cover-line {background-color: #222225;}
-		.node-wrap-box::before,.auto-judge::before {background-color: #222225;}
-		.branch-box .add-branch {background: #222225;}
+		.bottom-right-cover-line {background-color: var(--el-bg-color);}
+		.node-wrap-box::before,.auto-judge::before {background-color: var(--el-bg-color);}
+		.branch-box .add-branch {background: var(--el-bg-color);}
 		.end-node .end-node-text {color: #d0d0d0;}
-		.auto-judge .sort-left:hover, .auto-judge .sort-right:hover {background: #222225;}
+		.auto-judge .sort-left:hover, .auto-judge .sort-right:hover {background: var(--el-bg-color);}
 	}
 
 </style>

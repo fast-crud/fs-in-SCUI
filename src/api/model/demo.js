@@ -33,5 +33,16 @@ export default {
 		get: async function(){
 			return await http.get(this.url);
 		}
+	},
+	status: {
+		url: `${config.API_URL}/demo/status`,
+		name: "模拟无权限",
+		get: async function(code){
+			return await http.get(this.url, {}, {
+				headers: {
+					"response-status": code
+				}
+			});
+		}
 	}
 }

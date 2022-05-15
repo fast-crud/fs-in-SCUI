@@ -10,6 +10,7 @@
 	import tinymce from 'tinymce/tinymce'
 	import 'tinymce/themes/silver'
 	import 'tinymce/icons/default'
+	import 'tinymce/models/dom'
 
 	// 引入编辑器插件
 	import 'tinymce/plugins/code'  //编辑源码
@@ -17,6 +18,7 @@
 	import 'tinymce/plugins/link'  //超链接
 	import 'tinymce/plugins/preview'//预览
 	import 'tinymce/plugins/table'  //表格
+	import 'tinymce/plugins/quickbars'  //快速工具条
 
 	export default {
 		components: {
@@ -41,11 +43,11 @@
 			},
 			plugins: {
 				type: [String, Array],
-				default: 'code image link preview table'
+				default: 'code image link preview table quickbars'
 			},
 			toolbar: {
 				type: [String, Array],
-				default: 'undo redo |  forecolor backcolor bold italic underline strikethrough link | formatselect fontselect fontsizeselect | \
+				default: 'undo redo |  forecolor backcolor bold italic underline strikethrough link | blocks fontfamily fontsize | \
 					alignleft aligncenter alignright alignjustify outdent indent lineheight | bullist numlist | \
 					image table  preview | code selectall'
 			}
@@ -61,22 +63,28 @@
 					statusbar: true,
 					plugins: this.plugins,
 					toolbar: this.toolbar,
-					fontsize_formats: '12px 14px 16px 18px 20px 22px 24px 28px 32px 36px 48px 56px 72px',
+					font_size_formats: '12px 14px 16px 18px 22px 24px 36px 72px',
 					height: this.height,
 					placeholder: this.placeholder,
 					branding: false,
 					resize: true,
 					elementpath: true,
 					content_style: "",
-					images_upload_handler: async (blobInfo, success, failure) => {
-						const data = new FormData();
-						data.append("file", blobInfo.blob() ,blobInfo.filename());
-						try {
-							const res = await API.common.upload.post(data)
-							success(res.data.src)
-						}catch (error) {
-							failure("Image upload failed")
-						}
+					quickbars_selection_toolbar: 'forecolor backcolor bold italic underline strikethrough link',
+					quickbars_image_toolbar: 'alignleft aligncenter alignright',
+					quickbars_insert_toolbar: false,
+					image_caption: true,
+					image_advtab: true,
+					images_upload_handler: function(blobInfo) {
+						return new Promise((resolve, reject) => {
+							const data = new FormData();
+							data.append("file", blobInfo.blob() ,blobInfo.filename());
+							API.common.upload.post(data).then((res) => {
+								resolve(res.data.src)
+							}).catch(() => {
+								reject("Image upload failed")
+							})
+						})
 					},
 					setup: function(editor) {
 						editor.on('init', function() {

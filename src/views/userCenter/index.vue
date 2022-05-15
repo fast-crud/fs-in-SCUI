@@ -74,7 +74,7 @@
 						<el-tab-pane :label="$t('user.settings')">
 							<el-form ref="form" :model="form" label-width="120px" style="margin-top:20px;">
 								<el-form-item :label="$t('user.nightmode')">
-									<el-switch v-model="config.theme" active-value="dark" inactive-value="default" inline-prompt active-icon="el-icon-moon" inactive-icon="el-icon-sunny"></el-switch>
+									<el-switch v-model="config.dark" inline-prompt active-icon="el-icon-moon" inactive-icon="el-icon-sunny"></el-switch>
 									<div class="el-form-item-msg">{{ $t('user.nightmode_msg') }}</div>
 								</el-form-item>
 								<el-form-item label="主题颜色">
@@ -157,15 +157,20 @@
 				colorList: ['#409EFF', '#009688', '#536dfe', '#ff5c93', '#c62f2f', '#fd726d'],
 				config: {
 					lang: this.$TOOL.data.get('APP_LANG') || this.$CONFIG.LANG,
-					theme: this.$TOOL.data.get('APP_THEME') || 'default',
+					dark: this.$TOOL.data.get('APP_DARK') || false,
 					colorPrimary: this.$TOOL.data.get('APP_COLOR') || this.$CONFIG.COLOR || '#409EFF'
 				}
 			}
 		},
 		watch:{
-			'config.theme'(val){
-				document.body.setAttribute('data-theme', val)
-				this.$TOOL.data.set("APP_THEME", val);
+			'config.dark'(val){
+				if(val){
+					document.documentElement.classList.add("dark")
+					this.$TOOL.data.set("APP_DARK", val)
+				}else{
+					document.documentElement.classList.remove("dark")
+					this.$TOOL.data.remove("APP_DARK")
+				}
 			},
 			'config.lang'(val){
 				this.$i18n.locale = val
@@ -176,7 +181,9 @@
 				for (let i = 1; i <= 9; i++) {
 					document.documentElement.style.setProperty(`--el-color-primary-light-${i}`, colorTool.lighten(val,i/10));
 				}
-				document.documentElement.style.setProperty(`--el-color-primary-darken-1`, colorTool.darken(val,0.1));
+				for (let i = 1; i <= 2; i++) {
+					document.documentElement.style.setProperty(`--el-color-primary-dark-${i}`, colorTool.darken(val,i/10));
+				}
 				this.$TOOL.data.set("APP_COLOR", val);
 			}
 		},

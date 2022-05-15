@@ -78,15 +78,17 @@
 							</template>
 						</el-table-column>
 						<el-table-column min-width="1"></el-table-column>
-						<el-table-column label="操作" fixed="right" width="100">
+						<el-table-column label="操作" fixed="right" width="120">
 							<template #default="scope">
-								<el-button @click="table_edit(scope.row, scope.$index)" type="text" size="small">{{scope.row.isSet?'保存':"修改"}}</el-button>
-								<el-button v-if="scope.row.isSet" @click="scope.row.isSet=false" type="text" size="small">取消</el-button>
-								<el-popconfirm v-if="!scope.row.isSet" title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
-									<template #reference>
-										<el-button type="text" size="small">删除</el-button>
-									</template>
-								</el-popconfirm>
+								<el-button-group>
+									<el-button @click="table_edit(scope.row, scope.$index)" text type="primary" size="small">{{scope.row.isSet?'保存':"修改"}}</el-button>
+									<el-button v-if="scope.row.isSet" @click="scope.row.isSet=false" text type="primary" size="small">取消</el-button>
+									<el-popconfirm v-if="!scope.row.isSet" title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
+										<template #reference>
+											<el-button text type="primary" size="small">删除</el-button>
+										</template>
+									</el-popconfirm>
+								</el-button-group>
 							</template>
 						</el-table-column>
 					</el-table>

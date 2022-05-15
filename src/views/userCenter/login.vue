@@ -17,13 +17,14 @@
 					</span>
 				</div>
 			</div>
+			<div class="login_adv__mask"></div>
 			<div class="login_adv__bottom">
 				© {{$CONFIG.APP_NAME}} {{$CONFIG.APP_VER}}
 			</div>
 		</div>
 		<div class="login_main">
 			<div class="login_config">
-				<el-button :icon="config.theme=='dark'?'el-icon-sunny':'el-icon-moon'" circle type="info" @click="configTheme"></el-button>
+				<el-button :icon="config.theme=='dark'?'el-icon-sunny':'el-icon-moon'" circle type="info" @click="configDark"></el-button>
 				<el-dropdown trigger="click" placement="bottom-end" @command="configLang">
 					<el-button circle>
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path d="M478.33 433.6l-90-218a22 22 0 0 0-40.67 0l-90 218a22 22 0 1 0 40.67 16.79L316.66 406h102.67l18.33 44.39A22 22 0 0 0 458 464a22 22 0 0 0 20.32-30.4zM334.83 362L368 281.65L401.17 362z" fill="currentColor"></path><path d="M267.84 342.92a22 22 0 0 0-4.89-30.7c-.2-.15-15-11.13-36.49-34.73c39.65-53.68 62.11-114.75 71.27-143.49H330a22 22 0 0 0 0-44H214V70a22 22 0 0 0-44 0v20H54a22 22 0 0 0 0 44h197.25c-9.52 26.95-27.05 69.5-53.79 108.36c-31.41-41.68-43.08-68.65-43.17-68.87a22 22 0 0 0-40.58 17c.58 1.38 14.55 34.23 52.86 83.93c.92 1.19 1.83 2.35 2.74 3.51c-39.24 44.35-77.74 71.86-93.85 80.74a22 22 0 1 0 21.07 38.63c2.16-1.18 48.6-26.89 101.63-85.59c22.52 24.08 38 35.44 38.93 36.1a22 22 0 0 0 30.75-4.9z" fill="currentColor"></path></svg>
@@ -58,14 +59,12 @@
 						<el-input v-model="ruleForm.password" prefix-icon="el-icon-lock" clearable show-password :placeholder="$t('login.PWPlaceholder')"></el-input>
 					</el-form-item>
 					<el-form-item style="margin-bottom: 10px;">
-						<el-row>
 							<el-col :span="12">
 								<el-checkbox :label="$t('login.rememberMe')" v-model="ruleForm.autologin"></el-checkbox>
 							</el-col>
 							<el-col :span="12" style="text-align: right;">
-								<el-button type="text">{{ $t('login.forgetPassword') }}？</el-button>
+								<el-link type="primary" :underline="false">{{ $t('login.forgetPassword') }}？</el-link>
 							</el-col>
-						</el-row>
 					</el-form-item>
 					<el-form-item>
 						<el-button type="primary" style="width: 100%;" :loading="islogin" round @click="login">{{ $t('login.signIn') }}</el-button>
@@ -103,7 +102,7 @@
 				islogin: false,
 				config: {
 					lang: this.$TOOL.data.get('APP_LANG') || this.$CONFIG.LANG,
-					theme: this.$TOOL.data.get('APP_THEME') || 'default'
+					dark: this.$TOOL.data.get('APP_DARK') || false
 				},
 				lang: [
 					{
@@ -131,13 +130,18 @@
 					this.ruleForm.password = 'user'
 				}
 			},
-			'config.theme'(val){
-				document.body.setAttribute('data-theme', val)
-				this.$TOOL.data.set("APP_THEME", val);
+			'config.dark'(val){
+				if(val){
+					document.documentElement.classList.add("dark")
+					this.$TOOL.data.set("APP_DARK", val)
+				}else{
+					document.documentElement.classList.remove("dark")
+					this.$TOOL.data.remove("APP_DARK")
+				}
 			},
 			'config.lang'(val){
 				this.$i18n.locale = val
-				this.$TOOL.data.set("APP_LANG", val);
+				this.$TOOL.data.set("APP_LANG", val)
 			}
 		},
 		created: function() {
@@ -202,8 +206,8 @@
 				this.$message.success("Login Success 登录成功")
 				this.islogin = false
 			},
-			configTheme(){
-				this.config.theme = this.config.theme=='default'?'dark':'default'
+			configDark(){
+				this.config.dark = this.config.dark ? false : true
 			},
 			configLang(command){
 				this.config.lang = command.value
@@ -215,7 +219,7 @@
 <style scoped>
 	.login_bg {width: 100%;height: 100%;background: #fff;display: flex;}
 	.login_adv {width: 33.33333%;background-color: #555;background-size: cover;background-position: center center;background-repeat: no-repeat;position: relative;}
-	.login_adv__title {color: #fff;padding: 40px;}
+	.login_adv__title {color: #fff;padding: 40px;position: absolute;top:0px;left:0px;right: 0px;z-index: 2;}
 	.login_adv__title h2 {font-size: 40px;}
 	.login_adv__title h4 {font-size: 18px;margin-top: 10px;font-weight: normal;}
 	.login_adv__title p {font-size: 14px;margin-top:10px;line-height: 1.8;color: rgba(255,255,255,0.6);}
@@ -223,7 +227,8 @@
 	.login_adv__title div span {margin-right: 15px;}
 	.login_adv__title div i {font-size: 40px;}
 	.login_adv__title div i.add {font-size: 20px;color: rgba(255,255,255,0.6);}
-	.login_adv__bottom {position: absolute;left:0px;right: 0px;bottom: 0px;color: #fff;padding: 40px;background-image:linear-gradient(transparent, #000);}
+	.login_adv__bottom {position: absolute;left:0px;right: 0px;bottom: 0px;color: #fff;padding: 40px;background-image:linear-gradient(transparent, #000);z-index: 3;}
+	.login_adv__mask {position: absolute;top:0px;left:0px;right: 0px;bottom: 0px;background: rgba(0,0,0,0.5);z-index: 1;}
 
 	.login_main {flex: 1;overflow: auto;display:flex;}
 	.login-form {width: 400px;margin: auto;padding:20px 0;}

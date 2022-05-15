@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 详情列表模板
- * @version: 1.1
- * @Author: sakuya
- * @Date: 2021年6月16日15:05:15
- * @LastEditors: sakuya
- * @LastEditTime: 2021年7月22日12:18:50
--->
-
 <template>
 	<el-container>
 		<el-header style="display: block;height:auto;">
@@ -70,12 +61,11 @@
 				<el-table-column type="selection" width="50" fixed></el-table-column>
 
 				<!-- 固定列-操作列 -->
-				<el-table-column label="操作" fixed="right" align="right" width="120">
+				<el-table-column label="操作" fixed="right" align="right" width="160">
 					<template #default="scope">
-						<el-button type="text" size="small" @click="table_show(scope.row, scope.$index)">查看</el-button>
-						<el-divider direction="vertical"></el-divider>
+						<el-button type="primary" plain size="small" @click="table_show(scope.row, scope.$index)">查看</el-button>
 						<el-dropdown>
-							<el-button  type="text" size="small">更多<el-icon class="el-icon--right"><el-icon-arrow-down /></el-icon></el-button>
+							<el-button plain size="small">更多<el-icon class="el-icon--right"><el-icon-arrow-down /></el-icon></el-button>
 							<template #dropdown>
 								<el-dropdown-menu>
 									<el-dropdown-item @click="table_edit(scope.row, scope.$index)">编辑</el-dropdown-item>

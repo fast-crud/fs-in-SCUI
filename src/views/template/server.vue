@@ -157,15 +157,17 @@
 								<el-table-column label="通知" prop="push" width="150"></el-table-column>
 								<el-table-column></el-table-column>
 								<el-table-column label="操作" width="150" align="right">
-									<el-dropdown>
-										<el-button type="text" size="small" icon="el-icon-more"></el-button>
-										<template #dropdown>
-											<el-dropdown-menu>
-												<el-dropdown-item>编辑</el-dropdown-item>
-												<el-dropdown-item divided>删除</el-dropdown-item>
-											</el-dropdown-menu>
-										</template>
-									</el-dropdown>
+									<el-button-group>
+										<el-dropdown>
+											<el-button text type="primary" size="small" icon="el-icon-more"></el-button>
+											<template #dropdown>
+												<el-dropdown-menu>
+													<el-dropdown-item>编辑</el-dropdown-item>
+													<el-dropdown-item divided>删除</el-dropdown-item>
+												</el-dropdown-menu>
+											</template>
+										</el-dropdown>
+									</el-button-group>
 								</el-table-column>
 							</el-table>
 							<el-button type="primary" icon="el-icon-plus" style="margin-top: 20px;"></el-button>
@@ -541,7 +543,7 @@
 	.tabs-pages > .el-tabs__header .el-tabs__nav-wrap {display: flex;justify-content:center;}
 	.tabs-pages > .el-tabs__header .el-tabs__item {height:60px;line-height: 60px;font-size: 14px;}
 	.tabs-pages > .el-tabs__content {overflow-x: hidden;overflow: auto;}
-	[data-theme="dark"] .tabs-pages > .el-tabs__header {background: #2b2b2b;}
+	.dark .tabs-pages > .el-tabs__header {background: var(--el-bg-color-overlay);}
 </style>
 
 <style scoped>

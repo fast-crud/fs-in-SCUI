@@ -38,15 +38,17 @@
 						<el-table-column label="姓名" prop="name" width="150" sortable='custom'></el-table-column>
 						<el-table-column label="所属角色" prop="groupName" width="200" sortable='custom'></el-table-column>
 						<el-table-column label="加入时间" prop="date" width="170" sortable='custom'></el-table-column>
-						<el-table-column label="操作" fixed="right" align="right" width="140">
+						<el-table-column label="操作" fixed="right" align="right" width="160">
 							<template #default="scope">
-								<el-button type="text" size="small" @click="table_show(scope.row, scope.$index)">查看</el-button>
-								<el-button type="text" size="small" @click="table_edit(scope.row, scope.$index)">编辑</el-button>
-								<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
-									<template #reference>
-										<el-button type="text" size="small">删除</el-button>
-									</template>
-								</el-popconfirm>
+								<el-button-group>
+									<el-button text type="primary" size="small" @click="table_show(scope.row, scope.$index)">查看</el-button>
+									<el-button text type="primary" size="small" @click="table_edit(scope.row, scope.$index)">编辑</el-button>
+									<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
+										<template #reference>
+											<el-button text type="primary" size="small">删除</el-button>
+										</template>
+									</el-popconfirm>
+								</el-button-group>
 							</template>
 						</el-table-column>
 

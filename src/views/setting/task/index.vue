@@ -170,4 +170,6 @@
 	.task-add:hover {color: #409EFF;}
 	.task-add i {font-size: 30px;}
 	.task-add p {font-size: 12px;margin-top: 20px;}
+	
+	.dark .task-item .bottom {border-color: var(--el-border-color-light);}
 </style>

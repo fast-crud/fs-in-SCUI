@@ -4,7 +4,7 @@
  * @Author: sakuya
  * @Date: 2021年11月29日21:51:15
  * @LastEditors: sakuya
- * @LastEditTime: 2022年2月9日09:59:37
+ * @LastEditTime: 2022年5月15日00:24:09
 -->
 
 <template>
@@ -29,7 +29,7 @@
 		</div>
 		<div class="scTable-page" v-if="!hidePagination&&!hideDo">
 			<div class="scTable-pagination">
-				<el-pagination v-if="!hidePagination" background :small="true" :layout="paginationLayout" :total="total" :page-size="pageSize" v-model:currentPage="currentPage" @current-change="paginationChange"></el-pagination>
+				<el-pagination v-if="!hidePagination" background :small="true" :layout="paginationLayout" :total="total" :page-size="scPageSize" :page-sizes="pageSizes" v-model:currentPage="currentPage" @current-change="paginationChange" @update:page-size="pageSizeChange"></el-pagination>
 			</div>
 			<div class="scTable-do" v-if="!hideDo">
 				<el-button v-if="!hideRefresh" @click="refresh" icon="el-icon-refresh" circle style="margin-left:15px"></el-button>
@@ -81,6 +81,7 @@
 			border: { type: Boolean, default: false },
 			stripe: { type: Boolean, default: false },
 			pageSize: { type: Number, default: config.pageSize },
+			pageSizes: { type: Array, default: config.pageSizes },
 			rowKey: { type: String, default: "" },
 			summaryMethod: { type: Function, default: null },
 			column: { type: Object, default: () => {} },
@@ -91,7 +92,7 @@
 			hideDo: { type: Boolean, default: false },
 			hideRefresh: { type: Boolean, default: false },
 			hideSetting: { type: Boolean, default: false },
-			paginationLayout: { type: String, default: "total, prev, pager, next, jumper" },
+			paginationLayout: { type: String, default: config.paginationLayout },
 		},
 		watch: {
 			//监听从props里拿到值了
@@ -111,6 +112,7 @@
 		},
 		data() {
 			return {
+				scPageSize: this.pageSize,
 				isActivat: true,
 				emptyText: "暂无数据",
 				toggleIndex: 0,
@@ -166,7 +168,7 @@
 				this.loading = true;
 				var reqData = {
 					[config.request.page]: this.currentPage,
-					[config.request.pageSize]: this.pageSize,
+					[config.request.pageSize]: this.scPageSize,
 					[config.request.prop]: this.prop,
 					[config.request.order]: this.order
 				}
@@ -209,6 +211,11 @@
 			},
 			//分页点击
 			paginationChange(){
+				this.getData();
+			},
+			//条数变化
+			pageSizeChange(size){
+				this.scPageSize = size
 				this.getData();
 			},
 			//刷新数据

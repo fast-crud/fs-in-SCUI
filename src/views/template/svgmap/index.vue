@@ -1,23 +1,14 @@
-<!--
- * @Descripttion: SVG MAP
- * @version: 2.0
- * @Author: sakuya
- * @Date: 2021年6月16日15:05:15
- * @LastEditors: sakuya
- * @LastEditTime: 2021年8月23日13:42:58
--->
-
 <template>
 	<el-container>
 
-		<el-main class="nopadding" style="background: #f6f8f9;" v-loading="mapLoading">
+		<el-main class="nopadding map-main" v-loading="mapLoading">
 			<scEcharts ref="map" :option="option"></scEcharts>
 		</el-main>
-		<el-aside width="340px" style="border-left: 1px solid #e6e6e6;border-right: 0;padding:15px;">
+		<el-aside width="340px"  class="map-aside">
 			<el-descriptions title="Shanghai China" :column="1" border>
 				<el-descriptions-item label="region">Shanghai</el-descriptions-item>
 				<el-descriptions-item label="area">6340.5 km2</el-descriptions-item>
-				<el-descriptions-item label="state"><em class="state state-1 status-processing"></em></el-descriptions-item>
+				<el-descriptions-item label="state"><sc-status-indicator pulse type="primary"></sc-status-indicator></el-descriptions-item>
 			</el-descriptions>
 			<el-collapse style="margin-top: 15px;">
 				<el-collapse-item title="video monitor" name="1">
@@ -126,23 +117,8 @@
 </script>
 
 <style scoped>
-	.state {width:8px;height:8px;background: #ddd;display: inline-block;border-radius: 50%;vertical-align: middle;}
-	.state-1 {background: #409EFF;}
-	.state-2 {background: #F56C6C;}
-	.status-processing {position: relative;}
-	.status-processing:after {position: absolute;top:0px;left:0px;width: 100%;height: 100%;border-radius: 50%;background: inherit;content: '';animation: warn 1.2s ease-in-out infinite;}
+	.map-main {background: #f6f8f9;}
+	.map-aside {border-left: 1px solid #e6e6e6;border-right: 0;padding:15px;}
 
-	@keyframes warn {
-		0% {
-			transform: scale(0.5);
-			opacity: 1;
-		}
-		30% {
-			opacity: 1;
-		}
-		100% {
-			transform: scale(2);
-			opacity: 0;
-		}
-	}
+	html.dark .map-main {background: var(--el-bg-color);}
 </style>

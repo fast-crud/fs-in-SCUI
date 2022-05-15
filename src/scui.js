@@ -27,7 +27,7 @@ import time from './directives/time'
 import copy from './directives/copy'
 import errorHandler from './utils/errorHandler'
 
-import * as elIcons from '@element-plus/icons'
+import * as elIcons from '@element-plus/icons-vue'
 import * as scIcons from './assets/icons'
 
 export default {

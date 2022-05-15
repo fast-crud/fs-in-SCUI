@@ -48,7 +48,7 @@ module.exports = {
 					},
 					elicons: {
 						name: "elicons",
-						test: /[\\/]node_modules[\\/]@element-plus[\\/]icons[\\/]/
+						test: /[\\/]node_modules[\\/]@element-plus[\\/]icons-vue[\\/]/
 					},
 					tinymce: {
 						name: "tinymce",

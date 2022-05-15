@@ -241,7 +241,7 @@
 	.selectLayout-item.active span {background: var(--el-color-primary);}
 
 
-	[data-theme=dark] {
+	.dark {
 		.widgets-aside {background: #2b2b2b;}
 		.customize-overlay {background: rgba(43,43,43,0.9);}
 	}
