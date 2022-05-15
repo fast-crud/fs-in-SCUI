@@ -86,7 +86,7 @@
 			},
 			filterMenu(map){
 				map.forEach(item => {
-					if(item.meta.hidden){
+					if(item.meta.hidden || item.meta.type=="button"){
 						return false
 					}
 					if(item.meta.type=='iframe'){
