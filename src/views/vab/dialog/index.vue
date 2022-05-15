@@ -38,7 +38,7 @@
 		</template>
 	</sc-dialog>
 
-	<sc-dialog v-model="dialog3" title="禁用拖拽" :drag="false" :show-fullscreen="false" :show-close="false">
+	<sc-dialog v-model="dialog3" title="禁用拖拽" :show-fullscreen="false" :show-close="false">
 		内容
 		<template #footer>
 			<el-button @click="dialog3 = false">取 消</el-button>
