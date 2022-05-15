@@ -9,7 +9,7 @@
 				</div>
 				<ul v-if="!ismobile" class="nav">
 					<li v-for="item in menu" :key="item" :class="pmenu.path==item.path?'active':''" @click="showMenu(item)">
-						<el-icon><component :is="item.meta.icon || el-icon-menu" /></el-icon>
+						<el-icon><component :is="item.meta.icon || 'el-icon-menu'" /></el-icon>
 						<span>{{ item.meta.title }}</span>
 					</li>
 				</ul>
