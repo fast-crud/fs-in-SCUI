@@ -4,7 +4,7 @@
 			<sc-editor v-model="html" placeholder="请输入" :height="400"></sc-editor>
 		</el-card>
 		<el-card shadow="never" header="配置" style="margin-top: 20px;">
-			<el-descriptions border column="1">
+			<el-descriptions border :column="1">
 				<el-descriptions-item label="v-model">绑定的内容</el-descriptions-item>
 				<el-descriptions-item label="placeholder">占位符</el-descriptions-item>
 				<el-descriptions-item label="height">编辑器高度，默认300</el-descriptions-item>
