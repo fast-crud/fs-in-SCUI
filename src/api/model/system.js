@@ -43,8 +43,17 @@ export default {
 	},
 	role: {
 		list: {
-			url: `${config.API_URL}/system/role/list`,
+			url: `${config.API_URL}/system/role/list2`,
 			name: "获取角色列表",
+			get: async function(params){
+				return await http.get(this.url, params);
+			}
+		}
+	},
+	dept: {
+		list: {
+			url: `${config.API_URL}/system/dept/list`,
+			name: "获取部门列表",
 			get: async function(params){
 				return await http.get(this.url, params);
 			}

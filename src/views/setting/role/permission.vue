@@ -3,18 +3,30 @@
 		<el-tabs tab-position="top">
 			<el-tab-pane label="菜单权限">
 				<div class="treeMain">
-					<el-tree ref="menu" node-key="name" :data="menu.list" :default-checked-keys="menu.checked" :props="menu.props" show-checkbox></el-tree>
+					<el-tree ref="menu" node-key="name" :data="menu.list" :props="menu.props" show-checkbox></el-tree>
 				</div>
 			</el-tab-pane>
-			<el-tab-pane label="部门权限">
-				<div class="treeMain">
-					<el-tree ref="group" node-key="name" :data="group.list" :default-checked-keys="group.checked" :props="group.props" show-checkbox></el-tree>
-				</div>
-			</el-tab-pane>
-			<el-tab-pane label="类型权限">
-				<div class="treeMain">
-					<el-tree ref="type" node-key="name" :data="type.list" :default-checked-keys="type.checked" :props="type.props" show-checkbox></el-tree>
-				</div>
+			<el-tab-pane label="数据权限">
+				<el-form label-width="100px" label-position="left">
+					<el-form-item label="规则类型">
+						<el-select v-model="data.dataType" placeholder="请选择">
+							<el-option label="全部可见" value="1"></el-option>
+							<el-option label="本人可见" value="2"></el-option>
+							<el-option label="所在部门可见" value="3"></el-option>
+							<el-option label="所在部门及子级可见" value="4"></el-option>
+							<el-option label="选择的部门可见" value="5"></el-option>
+							<el-option label="自定义" value="6"></el-option>
+						</el-select>
+					</el-form-item>
+					<el-form-item label="选择部门" v-show="data.dataType=='5'">
+						<div class="treeMain" style="width: 100%;">
+							<el-tree ref="dept" node-key="id" :data="data.list" :props="data.props" show-checkbox></el-tree>
+						</div>
+					</el-form-item>
+					<el-form-item label="规则值" v-show="data.dataType=='6'">
+						<el-input v-model="data.rule" clearable type="textarea" :rows="6" placeholder="请输入自定义规则代码"></el-input>
+					</el-form-item>
+				</el-form>
 			</el-tab-pane>
 			<el-tab-pane label="控制台">
 				<el-form label-width="100px" label-position="left">
@@ -46,22 +58,19 @@
 				isSaveing: false,
 				menu: {
 					list: [],
-					checked: ["test", "system", "user", "role"],
+					checked: [],
 					props: {
 						label: (data)=>{
 							return data.meta.title
 						}
 					}
 				},
-				group: {
+				data: {
+					dataType :"1",
 					list: [],
 					checked: [],
-					props: {}
-				},
-				type: {
-					list: [],
-					checked: [],
-					props: {}
+					props: {},
+					rule: ""
 				},
 				dashboard: "0",
 				dashboardOptions: [
@@ -80,9 +89,8 @@
 			}
 		},
 		mounted() {
-			this.getMenu();
-			this.getGroup();
-			this.getType();
+			this.getMenu()
+			this.getDept()
 		},
 		methods: {
 			open(){
@@ -90,6 +98,14 @@
 			},
 			submit(){
 				this.isSaveing = true;
+
+				//选中的和半选的合并后传值接口
+				var checkedKeys = this.$refs.menu.getCheckedKeys().concat(this.$refs.menu.getHalfCheckedKeys())
+				console.log(checkedKeys)
+
+				var checkedKeys_dept = this.$refs.dept.getCheckedKeys().concat(this.$refs.dept.getHalfCheckedKeys())
+				console.log(checkedKeys_dept)
+
 				setTimeout(()=>{
 					this.isSaveing = false;
 					this.visible = false;
@@ -98,29 +114,24 @@
 				},1000)
 			},
 			async getMenu(){
-				var res = await this.$API.system.menu.list.get();
-				this.menu.list = res.data;
+				var res = await this.$API.system.menu.list.get()
+				this.menu.list = res.data
+
+				//获取接口返回的之前选中的和半选的合并，处理过滤掉有叶子节点的key
+				this.menu.checked = ["system", "user", "user.add", "user.edit", "user.del", "directive.edit", "other", "directive"]
+				this.$nextTick(() => {
+					let filterKeys = this.menu.checked.filter(key => this.$refs.menu.getNode(key).isLeaf)
+					this.$refs.menu.setCheckedKeys(filterKeys, true)
+				})
 			},
-			getGroup(){
-				this.group.list = [
-					{label: 'JL00'},
-					{label: 'LP01'},
-					{label: 'LP07'},
-					{label: 'SL01'},
-					{label: 'TL06'},
-					{label: 'TL09'},
-					{label: 'YP07'}
-				];
-			},
-			getType(){
-				this.type.list = [
-					{label: '原料采购'},
-					{label: '厂内互供'},
-					{label: '炼销订单'},
-					{label: '化工统销订单'},
-					{label: '移库单'},
-					{label: '自销订单'},
-				];
+			async getDept(){
+				var res = await this.$API.system.dept.list.get();
+				this.data.list = res.data
+				this.data.checked = ["12", "2", "21", "22", "1"]
+				this.$nextTick(() => {
+					let filterKeys = this.data.checked.filter(key => this.$refs.dept.getNode(key).isLeaf)
+					this.$refs.dept.setCheckedKeys(filterKeys, true)
+				})
 			}
 		}
 	}

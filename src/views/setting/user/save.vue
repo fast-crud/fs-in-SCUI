@@ -18,8 +18,13 @@
 					<el-input type="password" v-model="form.password2" clearable show-password></el-input>
 				</el-form-item>
 			</template>
+			<el-form-item label="所属部门" prop="dept">
+				<el-cascader v-model="form.dept" :options="depts" :props="deptsProps" clearable style="width: 100%;"></el-cascader>
+			</el-form-item>
 			<el-form-item label="所属角色" prop="group">
-				<el-cascader v-model="form.group" :options="groups" :props="groupsProps" :show-all-levels="false" clearable style="width: 100%;"></el-cascader>
+				<el-select v-model="form.group" multiple filterable style="width: 100%">
+					<el-option v-for="item in groups" :key="item.id" :label="item.label" :value="item.id"/>
+				</el-select>
 			</el-form-item>
 		</el-form>
 		<template #footer>
@@ -48,7 +53,8 @@
 					userName: "",
 					avatar: "",
 					name: "",
-					group: ""
+					dept: "",
+					group: []
 				},
 				//验证规则
 				rules: {
@@ -80,8 +86,11 @@
 							}
 						}}
 					],
+					dept: [
+						{required: true, message: '请选择所属部门'}
+					],
 					group: [
-						{required: true, message: '请选择所属角色'}
+						{required: true, message: '请选择所属角色', trigger: 'change'}
 					]
 				},
 				//所需数据选项
@@ -90,11 +99,17 @@
 					value: "id",
 					multiple: true,
 					checkStrictly: true
+				},
+				depts: [],
+				deptsProps: {
+					value: "id",
+					checkStrictly: true
 				}
 			}
 		},
 		mounted() {
 			this.getGroup()
+			this.getDept()
 		},
 		methods: {
 			//显示
@@ -106,7 +121,11 @@
 			//加载树数据
 			async getGroup(){
 				var res = await this.$API.system.role.list.get();
-				this.groups = res.data;
+				this.groups = res.data.rows;
+			},
+			async getDept(){
+				var res = await this.$API.system.dept.list.get();
+				this.depts = res.data;
 			},
 			//表单提交方法
 			submit(){
@@ -134,6 +153,7 @@
 				this.form.avatar = data.avatar
 				this.form.name = data.name
 				this.form.group = data.group
+				this.form.dept = data.dept
 
 				//可以和上面一样单个注入，也可以像下面一样直接合并进去
 				//Object.assign(this.form, data)

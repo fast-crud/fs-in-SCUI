@@ -152,7 +152,7 @@
 			//加载树数据
 			async getGroup(){
 				this.showGrouploading = true;
-				var res = await this.$API.system.role.list.get();
+				var res = await this.$API.system.dept.list.get();
 				this.showGrouploading = false;
 				var allNode ={id: '', label: '所有'}
 				res.data.unshift(allNode);
