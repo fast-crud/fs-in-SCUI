@@ -296,7 +296,9 @@ export default {
 				'sc-icon-file-word',
 				'sc-icon-file-excel',
 				'sc-icon-file-ppt',
-				'sc-icon-organization'
+				'sc-icon-organization',
+				'sc-icon-upload',
+				'sc-icon-download'
 			]
 		}
 	]
