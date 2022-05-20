@@ -27,6 +27,13 @@ export default {
 			return await http.get(this.url, params);
 		}
 	},
+	list: {
+		url: `${config.API_URL}/demo/list`,
+		name: "数据列表",
+		get: async function(params){
+			return await http.get(this.url, params);
+		}
+	},
 	menu: {
 		url: `${config.API_URL}/demo/menu`,
 		name: "普通用户菜单",
