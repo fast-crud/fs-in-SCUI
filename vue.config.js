@@ -61,6 +61,10 @@ module.exports = {
 					xgplayer: {
 						name: "xgplayer",
 						test: /[\\/]node_modules[\\/]xgplayer.*[\\/]/
+					},
+					codemirror: {
+						name: "codemirror",
+						test: /[\\/]node_modules[\\/]codemirror[\\/]/
 					}
 				}
 			}
