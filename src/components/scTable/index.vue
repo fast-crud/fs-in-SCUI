@@ -1,10 +1,10 @@
 <!--
  * @Descripttion: 数据表格组件
- * @version: 1.7
+ * @version: 1.8
  * @Author: sakuya
  * @Date: 2021年11月29日21:51:15
  * @LastEditors: sakuya
- * @LastEditTime: 2022年5月15日00:24:09
+ * @LastEditTime: 2022年5月21日18:08:46
 -->
 
 <template>
@@ -321,6 +321,44 @@
 			},
 			configSizeChange(){
 				this.$refs.scTable.doLayout()
+			},
+			//插入行 unshiftRow
+			unshiftRow(row){
+				this.tableData.unshift(row)
+			},
+			//插入行 pushRow
+			pushRow(row){
+				this.tableData.push(row)
+			},
+			//根据key覆盖数据
+			updateKey(row, rowKey=this.rowKey){
+				this.tableData.filter(item => item[rowKey]===row[rowKey] ).forEach(item => {
+					Object.assign(item, row)
+				})
+			},
+			//根据index覆盖数据
+			updateIndex(row, index){
+				Object.assign(this.tableData[index], row)
+			},
+			//根据index删除
+			removeIndex(index){
+				this.tableData.splice(index, 1)
+			},
+			//根据index批量删除
+			removeIndexes(indexes=[]){
+				indexes.forEach(index => {
+					this.tableData.splice(index, 1)
+				})
+			},
+			//根据key删除
+			removeKey(key, rowKey=this.rowKey){
+				this.tableData.splice(this.tableData.findIndex(item => item[rowKey]===key), 1)
+			},
+			//根据keys批量删除
+			removeKeys(keys=[], rowKey=this.rowKey){
+				keys.forEach(key => {
+					this.tableData.splice(this.tableData.findIndex(item => item[rowKey]===key), 1)
+				})
 			},
 			//原生方法转发
 			clearSelection(){
