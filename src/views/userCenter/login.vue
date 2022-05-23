@@ -169,7 +169,9 @@
 				//获取token
 				var user = await this.$API.auth.token.post(data)
 				if(user.code == 200){
-					this.$TOOL.data.set("TOKEN", user.data.token)
+					this.$TOOL.cookie.set("TOKEN", user.data.token, {
+						expires: this.ruleForm.autologin? 24*60*60 : 0
+					})
 					this.$TOOL.data.set("USER_INFO", user.data.userInfo)
 				}else{
 					this.islogin = false

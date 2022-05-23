@@ -1,8 +1,8 @@
 /*
  * @Descripttion: 工具集
- * @version: 1.1
+ * @version: 1.2
  * @LastEditors: sakuya
- * @LastEditTime: 2021年7月20日10:58:41
+ * @LastEditTime: 2022年5月24日00:28:56
  */
 
 import CryptoJS from 'crypto-js';
@@ -11,44 +11,34 @@ const tool = {}
 
 /* localStorage */
 tool.data = {
-    /**
-     * 设置缓存
-     * @param {*} key 
-     * @param {*} data 
-     * @param {*} time 过期时间 单位秒 （默认：0 不过期） 
-     * @returns 
-     */
-	set(key, data, time = 0) {
-        let cacheVal = {
-            val: data,
-            time: parseInt(time) === 0 ? 0 : parseInt(time) * 1000 + new Date().getTime()
-        };
-        return localStorage.setItem(key, JSON.stringify(cacheVal));
+	set(key, data, datetime = 0) {
+        let cacheValue = {
+            content: data,
+            datetime: parseInt(datetime) === 0 ? 0 : new Date().getTime() + parseInt(datetime) * 1000
+        }
+        return localStorage.setItem(key, JSON.stringify(cacheValue))
 	},
 	get(key) {
         try {
-            const value = JSON.parse(localStorage.getItem(key)) 
+            const value = JSON.parse(localStorage.getItem(key))
             if (value) {
-                let now = new Date().getTime();
-                if (now > value.time && value.time != 0) {//缓存过期
+                let nowTime = new Date().getTime()
+                if (nowTime > value.datetime && value.datetime != 0) {
                     localStorage.removeItem(key)
                     return null;
                 }
-                return value.val
+                return value.content
             }
             return null
-        } catch (e) { 
+        } catch (err) {
             return null
         }
 	},
-    del (key) {
-        return localStorage.removeItem(key);
-    },
-	remove(table) {
-		return localStorage.removeItem(table);
+	remove(key) {
+		return localStorage.removeItem(key)
 	},
 	clear() {
-		return localStorage.clear();
+		return localStorage.clear()
 	}
 }
 
@@ -72,6 +62,46 @@ tool.session = {
 	},
 	clear() {
 		return sessionStorage.clear();
+	}
+}
+
+/*cookie*/
+tool.cookie = {
+	set(name, value, config={}) {
+		var cfg = {
+			expires: null,
+			path: null,
+			domain: null,
+			secure: false,
+			httpOnly: false,
+			...config
+		}
+		var cookieStr = `${name}=${escape(value)}`
+		if(cfg.expires){
+			var exp = new Date()
+			exp.setTime(exp.getTime() + parseInt(cfg.expires) * 1000)
+			cookieStr += `;expires=${exp.toGMTString()}`
+		}
+		if(cfg.path){
+			cookieStr += `;path=${cfg.path}`
+		}
+		if(cfg.domain){
+			cookieStr += `;domain=${cfg.domain}`
+		}
+		document.cookie = cookieStr
+	},
+	get(name){
+		var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"))
+		if(arr != null){
+			return unescape(arr[2])
+		}else{
+			return null
+		}
+	},
+	remove(name){
+		var exp = new Date()
+		exp.setTime(exp.getTime() - 1)
+		document.cookie = `${name}=;expires=${exp.toGMTString()}`
 	}
 }
 
