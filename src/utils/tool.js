@@ -11,19 +11,39 @@ const tool = {}
 
 /* localStorage */
 tool.data = {
-	set(table, settings) {
-		var _set = JSON.stringify(settings)
-		return localStorage.setItem(table, _set);
+    /**
+     * 设置缓存
+     * @param {*} key 
+     * @param {*} data 
+     * @param {*} time 过期时间 单位秒 （默认：0 不过期） 
+     * @returns 
+     */
+	set(key, data, time = 0) {
+        let cacheVal = {
+            val: data,
+            time: parseInt(time) === 0 ? 0 : parseInt(time) * 1000 + new Date().getTime()
+        };
+        return localStorage.setItem(key, JSON.stringify(cacheVal));
 	},
-	get(table) {
-		var data = localStorage.getItem(table);
-		try {
-			data = JSON.parse(data)
-		} catch (err) {
-			return null
-		}
-		return data;
+	get(key) {
+        try {
+            const value = JSON.parse(localStorage.getItem(key)) 
+            if (value) {
+                let now = new Date().getTime();
+                if (now > value.time && value.time != 0) {//缓存过期
+                    localStorage.removeItem(key)
+                    return null;
+                }
+                return value.val
+            }
+            return null
+        } catch (e) { 
+            return null
+        }
 	},
+    del (key) {
+        return localStorage.removeItem(key);
+    },
 	remove(table) {
 		return localStorage.removeItem(table);
 	},
