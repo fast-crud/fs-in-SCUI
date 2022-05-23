@@ -3,19 +3,12 @@
 		<el-row :gutter="15">
 			<el-col :lg="18">
 				<el-card shadow="never">
+					<el-alert title="资源库选择器即将弃用,将不会维护更新,与1.7版本之后将移除此组件" type="error" style="margin-bottom:20px;"></el-alert>
 					<sc-file-select v-model="file" :multiple="multiple" :hideUpload="hideUpload" :max="99" @submit="submit">
 						<template #do>
 							<el-button>自定义插槽</el-button>
 						</template>
 					</sc-file-select>
-				</el-card>
-				<el-card shadow="never" header="已集成的上传组件">
-					<p>
-						<sc-upload v-model="upload" title="单选" file-select></sc-upload>
-					</p>
-					<p style="margin-top: 15px;">
-						<sc-upload-multiple v-model="upload2" title="多选" file-select></sc-upload-multiple>
-					</p>
 				</el-card>
 			</el-col>
 			<el-col :lg="6">
