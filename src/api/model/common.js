@@ -9,6 +9,13 @@ export default {
 			return await http.post(this.url, data, config);
 		}
 	},
+	uploadFile: {
+		url: `${config.API_URL}/uploadFile`,
+		name: "附件上传",
+		post: async function(data, config={}){
+			return await http.post(this.url, data, config);
+		}
+	},
 	file: {
 		menu: {
 			url: `${config.API_URL}/file/menu`,
