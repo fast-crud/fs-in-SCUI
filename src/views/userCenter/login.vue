@@ -145,7 +145,7 @@
 			}
 		},
 		created: function() {
-			this.$TOOL.data.remove("TOKEN")
+			this.$TOOL.cookie.remove("TOKEN")
 			this.$TOOL.data.remove("USER_INFO")
 			this.$TOOL.data.remove("MENU")
 			this.$TOOL.data.remove("PERMISSIONS")
