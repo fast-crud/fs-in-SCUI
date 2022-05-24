@@ -23,6 +23,8 @@
 			:disabled="disabled"
 			:show-file-list="showFileList"
 			:action="action"
+			:name="name"
+			:data="data"
 			:accept="accept"
 			:limit="1"
 			:http-request="request"
@@ -30,8 +32,7 @@
 			:before-upload="before"
 			:on-success="success"
 			:on-error="error"
-			:on-exceed="handleExceed"
-		>
+			:on-exceed="handleExceed">
 			<slot>
 				<div class="el-upload--picture-card">
 					<div class="file-empty">
@@ -67,6 +68,8 @@
 			icon: { type: String, default: "el-icon-plus" },
 			action: { type: String, default: "" },
 			apiObj: { type: Object, default: () => {} },
+			name: { type: String, default: config.filename },
+			data: { type: Object, default: () => {} },
 			accept: { type: String, default: "image/gif, image/jpeg, image/png" },
 			maxSize: { type: Number, default: config.maxSizeFile },
 			limit: { type: Number, default: 1 },
@@ -213,8 +216,10 @@
 					apiObj = this.apiObj;
 				}
 				const data = new FormData();
-				var file = param.file
-				data.append("file", file);
+				data.append(param.filename, param.file);
+				for (const key in param.data) {
+					data.append(key, param.data[key]);
+				}
 				apiObj.post(data, {
 					onUploadProgress: e => {
 						const complete = parseInt(((e.loaded / e.total) * 100) | 0, 10)

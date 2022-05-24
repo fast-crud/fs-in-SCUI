@@ -1,6 +1,22 @@
 <template>
 	<div class="sc-upload-multiple">
-		<el-upload ref="uploader" :auto-upload="autoUpload" list-type="picture-card" :disabled="disabled" :action="action" :http-request="request" :file-list="defaultFileList" :show-file-list="showFileList" :accept="accept" :multiple="multiple" :limit="limit" :before-upload="before" :on-success="success" :on-error="error" :on-preview="handlePreview" :on-exceed="handleExceed">
+		<el-upload ref="uploader" list-type="picture-card" 
+			:auto-upload="autoUpload" 
+			:disabled="disabled" 
+			:action="action" 
+			:name="name" 
+			:data="data" 
+			:http-request="request" 
+			:file-list="defaultFileList" 
+			:show-file-list="showFileList" 
+			:accept="accept" 
+			:multiple="multiple" 
+			:limit="limit" 
+			:before-upload="before" 
+			:on-success="success" 
+			:on-error="error" 
+			:on-preview="handlePreview" 
+			:on-exceed="handleExceed">
 			<slot>
 				<el-icon><el-icon-plus/></el-icon>
 			</slot>
@@ -39,6 +55,8 @@
 			tip: { type: String, default: "" },
 			action: { type: String, default: "" },
 			apiObj: { type: Object, default: () => {} },
+			name: { type: String, default: config.filename },
+			data: { type: Object, default: () => {} },
 			accept: { type: String, default: "image/gif, image/jpeg, image/png" },
 			maxSize: { type: Number, default: config.maxSizeFile },
 			limit: { type: Number, default: 0 },
@@ -169,8 +187,10 @@
 					apiObj = this.apiObj;
 				}
 				const data = new FormData();
-				var file = param.file
-				data.append("file", file);
+				data.append(param.filename, param.file);
+				for (const key in param.data) {
+					data.append(key, param.data[key]);
+				}
 				apiObj.post(data, {
 					onUploadProgress: e => {
 						const complete = parseInt(((e.loaded / e.total) * 100) | 0, 10)

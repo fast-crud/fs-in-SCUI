@@ -1,7 +1,7 @@
 <template>
 	<el-main>
 		<el-card shadow="never" header="文件示例">
-			<sc-upload-file v-model="fileurl" :limit="3" tip="最多上传3个文件,单个文件不要超过10M,请上传xlsx/docx格式文件">
+			<sc-upload-file v-model="fileurl" :limit="3" :data="{otherData:'demo'}" tip="最多上传3个文件,单个文件不要超过10M,请上传xlsx/docx格式文件">
 				<el-button type="primary" icon="el-icon-upload">上传附件</el-button>
 			</sc-upload-file>
 		</el-card>

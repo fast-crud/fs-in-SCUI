@@ -1,6 +1,23 @@
 <template>
 	<div class="sc-upload-file">
-		<el-upload :disabled="disabled" :auto-upload="autoUpload" :action="action" :http-request="request" :file-list="defaultFileList" :show-file-list="showFileList" :drag="drag" :accept="accept" :multiple="multiple" :limit="limit" :before-upload="before" :on-success="success" :on-error="error" :on-preview="handlePreview" :on-exceed="handleExceed">
+		<el-upload 
+			:disabled="disabled" 
+			:auto-upload="autoUpload" 
+			:action="action" 
+			:name="name" 
+			:data="data" 
+			:http-request="request" 
+			:file-list="defaultFileList" 
+			:show-file-list="showFileList" 
+			:drag="drag" 
+			:accept="accept" 
+			:multiple="multiple" 
+			:limit="limit" 
+			:before-upload="before" 
+			:on-success="success" 
+			:on-error="error" 
+			:on-preview="handlePreview" 
+			:on-exceed="handleExceed">
 			<slot>
 				<el-button type="primary" :disabled="disabled">Click to upload</el-button>
 			</slot>
@@ -21,6 +38,8 @@
 			tip: { type: String, default: "" },
 			action: { type: String, default: "" },
 			apiObj: { type: Object, default: () => {} },
+			name: { type: String, default: config.filename },
+			data: { type: Object, default: () => {} },
 			accept: { type: String, default: "" },
 			maxSize: { type: Number, default: config.maxSizeFile },
 			limit: { type: Number, default: 0 },
@@ -120,8 +139,10 @@
 					apiObj = this.apiObj;
 				}
 				const data = new FormData();
-				var file = param.file
-				data.append("file", file);
+				data.append(param.filename, param.file);
+				for (const key in param.data) {
+					data.append(key, param.data[key]);
+				}
 				apiObj.post(data, {
 					onUploadProgress: e => {
 						const complete = parseInt(((e.loaded / e.total) * 100) | 0, 10)
