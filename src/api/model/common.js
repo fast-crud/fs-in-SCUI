@@ -16,6 +16,13 @@ export default {
 			return await http.post(this.url, data, config);
 		}
 	},
+	exportFile: {
+		url: `${config.API_URL}/fileExport`,
+		name: "导出附件",
+		get: async function(data, config={}){
+			return await http.get(this.url, data, config);
+		}
+	},
 	file: {
 		menu: {
 			url: `${config.API_URL}/file/menu`,
