@@ -4,13 +4,35 @@
 // routes 显示在左侧菜单中的路由(显示顺序在动态路由之前)
 // 示例如下
 
+// const routes = [
+// 	{
+// 		name: "demo",
+// 		path: "/demo",
+// 		meta: {
+// 			icon: "el-icon-eleme-filled",
+// 			title: "演示",
+// 			role: ["SA"]
+// 		},
+// 		children: [{
+// 			name: "demopage",
+// 			path: "/demopage",
+// 			component: "test/autocode/index",
+// 			meta: {
+// 				icon: "el-icon-menu",
+// 				title: "演示页面",
+// 				role: ["SA"]
+// 			}
+// 		}]
+// 	}
+// ]
+
 const routes = [
 	{
 		name: "demo",
 		path: "/demo",
 		meta: {
 			icon: "el-icon-eleme-filled",
-			title: "演示",
+			title: "FastCrud",
 			role: ["SA"]
 		},
 		children: [{
@@ -21,19 +43,8 @@ const routes = [
 				icon: "el-icon-menu",
 				title: "FastCrud示例",
 			}
-		},{
-			name: "demopage",
-			path: "/demopage",
-			component: "test/autocode/index",
-			meta: {
-				icon: "el-icon-menu",
-				title: "演示页面",
-				role: ["SA"]
-			}
 		}]
 	}
 ]
-
-// const routes = []
 
 export default routes;
